@@ -6,9 +6,9 @@ def chatbot(user_input):
         return "Hi there! How can I help you today?"
     elif "how are you" in user_input:
         return "I'm just a bot, but I'm doing great! Thanks for asking."
-    elif "what is your favorite animal?" in user_input:
+    elif "what is your favourite animal?" in user_input:
         return "I love cats! They're so cute and clever, What about you?"
-    elif "what is your favorite food?" in user_input:
+    elif "what is your favourite food?" in user_input:
         return "I enjoy virtual cookies 🍪 they never spoil!"
     elif "what are you doing?" in user_input:
         return "I'm chatting with you and learning new things every day!"
