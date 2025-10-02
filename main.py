@@ -1,4 +1,4 @@
-print("Welcome to CODSOFT AI Projects App")
+print("Welcome to CODSOFT AI Projects ")
 print("Choose a project to run:")
 print("1. Chatbot")
 print("2. Tic-Tac-Toe AI")
