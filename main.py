@@ -1,0 +1,6 @@
+print("Welcome to CODSOFT AI Projects App")
+print("Choose a project to run:")
+print("1. Chatbot")
+print("2. Tic-Tac-Toe AI")
+print("3. Recommendation System")
+print("4. Exit")
