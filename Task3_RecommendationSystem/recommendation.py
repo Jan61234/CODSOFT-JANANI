@@ -1,25 +1,36 @@
+
 users = {
     "Alice": ["Harry Potter", "Inception", "Avengers"],
     "Bob": ["Inception", "Avengers", "Titanic"],
     "Charlie": ["Harry Potter", "Titanic", "Joker"]
 }
 
-def recommend(user):
-    if user not in users:
-        print(f"Sorry, we don't have data for {user}.")
-        return
+# Function to get recommendations
+def recommend(user_name, user_items):
     recommendations = []
     for other_user, items in users.items():
-        if other_user != user:
-            for item in items:
-                if item not in users[user]:
-                    recommendations.append(item)
+        for item in items:
+            if item not in user_items:
+                recommendations.append(item)
     recs = set(recommendations)
     if recs:
-        print(f"Recommendations for {user}: {recs}")
+        print(f"\nRecommendations for {user_name}: {recs}")
     else:
-        print(f"No new recommendations available for {user}.")
+        print(f"\nNo new recommendations available for {user_name}.")
 
-# Ask for user input
+# Main program
+print("Welcome to the Recommendation System!\n")
 user_name = input("Enter your name: ")
-recommend(user_name)
+
+# Let user enter their preferences
+print("\nEnter your items of interest one by one. Type 'done' when finished:")
+user_items = []
+while True:
+    item = input("Item: ")
+    if item.lower() == "done":
+        break
+    if item.strip() != "":
+        user_items.append(item.strip())
+
+# Show recommendations
+recommend(user_name, user_items)
