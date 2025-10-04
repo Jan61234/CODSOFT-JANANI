@@ -1,61 +1,49 @@
 
-users = {
-    "Alice": ["Harry Potter", "Inception", "Avengers"],
-    "Bob": ["Inception", "Avengers", "Titanic"],
-    "Charlie": ["Harry Potter", "Titanic", "Joker"],
-    "David": ["Joker", "Inception", "Interstellar"]
+
+# Preference-Based Movie Recommendation System
+
+
+# Predefined preference categories
+preferences = {
+    "Preference 1": ["Harry Potter", "Fantastic Beasts", "Percy Jackson", "The Hobbit"],
+    "Preference 2": ["Inception", "Interstellar", "Tenet", "The Prestige"],
+    "Preference 3": ["Avengers", "Iron Man", "Captain America", "Thor"],
+    "Preference 4": ["Titanic", "The Notebook", "La La Land", "P.S. I Love You"],
+    "Preference 5": ["Joker", "Fight Club", "The Dark Knight", "Gone Girl"]
 }
 
-# Function to calculate similarity between two users
-def calculate_similarity(user_items, other_items):
-    common = set(user_items) & set(other_items)
-    return len(common)
-
-# Function to recommend items based on most similar user
-def recommend(user_name, user_items):
-    most_similar_user = None
-    max_similarity = 0
-
-    for other_user, items in users.items():
-        if other_user == user_name:
-            continue
-        similarity = calculate_similarity(user_items, items)
-        if similarity > max_similarity:
-            max_similarity = similarity
-            most_similar_user = other_user
-
-    if most_similar_user:
-        similar_user_items = set(users[most_similar_user])
-        new_recommendations = similar_user_items - set(user_items)
-
-        if new_recommendations:
-            print(f"\n Recommendations for {user_name} (based on {most_similar_user}'s preferences):")
-            for rec in new_recommendations:
-                print(f" - {rec}")
-        else:
-            print(f"\n {user_name}, you’ve already seen what {most_similar_user} likes! No new recommendations.")
-    else:
-        print(f"\n⚠️ No similar users found. Try adding more preferences!")
-
-# -------------------------------
-# Main Program
-# -------------------------------
 print(" Welcome to the Smart Movie Recommendation System!\n")
-user_name = input("Enter your name: ")
+print("We’ll recommend movies similar to your interests.")
 
-# Collect user preferences
-print("\nEnter your favorite movies one by one. Type 'done' when finished:")
-user_items = []
+# Step 1: Ask for user input
+user_name = input("\nEnter your name: ")
+print("\nEnter your favorite movies one by one (type 'done' when finished):")
+
+user_movies = []
 while True:
-    item = input("Movie: ")
-    if item.lower() == "done":
+    movie = input("Movie: ").strip()
+    if movie.lower() == "done":
         break
-    if item.strip() != "":
-        user_items.append(item.strip())
+    if movie:
+        user_movies.append(movie)
 
-# Save this user into dataset (optional)
-users[user_name] = user_items
+# Step 2: Generate recommendations
+recommendations = set()
 
-# Generate recommendations
-recommend(user_name, user_items)
+for movie in user_movies:
+    for pref_name, movie_list in preferences.items():
+        if movie in movie_list:
+            # Add other movies from same preference
+            for m in movie_list:
+                if m not in user_movies:
+                    recommendations.add(m)
 
+# Step 3: Display results
+if recommendations:
+    print(f"\n {user_name}, based on your preferences, you might enjoy:")
+    for rec in recommendations:
+        print(f" - {rec}")
+else:
+    print(f"\n⚠️ Sorry {user_name}, we couldn’t find any similar movies. Try entering popular titles next time!")
+
+print("\n Thank you for using the Recommendation System!")
